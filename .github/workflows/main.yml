@@ -1,0 +1,17 @@
+name: PR source branch guard
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  require-develop-into-main:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Only allow develop into main
+        run: |
+          if [ "${{ github.head_ref }}" != "develop" ]; then
+            echo "Only develop can be merged into main."
+            exit 1
+          fi
