@@ -11,11 +11,13 @@ Android 原生 Jetpack Compose App，package name 為 `com.justplay.meterlog`。
 
 ## Firebase 設定
 
-目前 `app/google-services.json` 是 placeholder。正式測試前請到 Firebase Console：
+本專案使用正式的 Firebase Android 設定檔 `app/google-services.json`。此檔案包含專案識別資訊，請只放在本機，不要推上 GitHub；目前 `.gitignore` 已排除 `app/google-services.json`。
+
+首次設定或需要重新下載時，請到 Firebase Console：
 
 1. 建立 Android App，package name 填 `com.justplay.meterlog`。
 2. 下載正式 `google-services.json`。
-3. 用正式檔案覆蓋 `app/google-services.json`。
+3. 將正式檔案放到本機路徑 `app/google-services.json`。
 4. 啟用 Firebase Authentication：
    - Email/Password
    - Google
@@ -26,7 +28,7 @@ Android 原生 Jetpack Compose App，package name 為 `com.justplay.meterlog`。
 defaultWebClientId=1234567890-xxxx.apps.googleusercontent.com
 ```
 
-`local.properties` 已被 `.gitignore` 排除，不應推上 GitHub。
+`app/google-services.json` 與 `local.properties` 都已被 `.gitignore` 排除，不應推上 GitHub。
 
 Firestore 資料路徑：
 
