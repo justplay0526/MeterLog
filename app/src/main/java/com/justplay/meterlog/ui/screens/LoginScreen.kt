@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Login
+import androidx.compose.material.icons.rounded.AccountCircle
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -65,7 +66,10 @@ internal fun LoginScreen(
     var emailHasFocus by remember { mutableStateOf(false) }
     val fieldErrors = AuthFieldErrors.from(state.error, state.emailError)
 
-    AuthScaffold(subtitle = "登入後同步整棟表具與讀數") {
+    AuthScaffold(
+        subtitle = "登入後同步整棟表具與讀數",
+        loading = state.loading
+    ) {
         AuthTextField(
             value = email,
             onValueChange = {
@@ -114,14 +118,20 @@ internal fun LoginScreen(
                         )
                     }
                 },
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f)
+                    .height(AuthButtonHeight),
                 enabled = !state.loading
             ) {
+                Icon(Icons.Rounded.AccountCircle, contentDescription = null)
+                Spacer(Modifier.width(8.dp))
                 Text("Google 登入")
             }
             Button(
                 onClick = { authViewModel.signIn(email, password) },
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f)
+                    .height(AuthButtonHeight),
                 enabled = !state.loading
             ) {
                 Icon(Icons.AutoMirrored.Rounded.Login, contentDescription = null)

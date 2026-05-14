@@ -7,7 +7,12 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.PersonAdd
 import androidx.compose.material3.Button
+import androidx.compose.material3.Icon
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -45,7 +50,10 @@ internal fun RegisterScreen(
         confirmPasswordError = state.confirmPasswordError
     )
 
-    AuthScaffold(subtitle = "建立帳號後開始同步資料") {
+    AuthScaffold(
+        subtitle = "建立帳號後開始同步資料",
+        loading = state.loading
+    ) {
         AuthTextField(
             value = email,
             onValueChange = {
@@ -132,16 +140,24 @@ internal fun RegisterScreen(
         ) {
             OutlinedButton(
                 onClick = onBackToLogin,
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f)
+                    .height(AuthButtonHeight),
                 enabled = !state.loading
             ) {
+                Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = null)
+                Spacer(Modifier.width(8.dp))
                 Text("返回登入")
             }
             Button(
                 onClick = { authViewModel.register(email, password, confirmPassword) },
-                modifier = Modifier.weight(1f),
+                modifier = Modifier
+                    .weight(1f)
+                    .height(AuthButtonHeight),
                 enabled = !state.loading
             ) {
+                Icon(Icons.Rounded.PersonAdd, contentDescription = null)
+                Spacer(Modifier.width(8.dp))
                 Text("建立帳號")
             }
         }
